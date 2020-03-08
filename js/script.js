@@ -63,12 +63,22 @@ window.addEventListener('DOMContentLoaded', function() {
     function updateClock() {
       let t = getTimeRemaining(endtime);
 
-      hours.textContent = t.hours;
-      minutes.textContent = t.minutes;
-      seconds.textContent = t.seconds;
+      // add null when get 1 digit
+      function zero(num) {
+        if (num <= 9) {
+          return '0' + num;
+        } else return num;
+      }
+
+      hours.textContent = zero(t.hours);
+      minutes.textContent = zero(t.minutes);
+      seconds.textContent = zero(t.seconds);
 
       if (t.total <= 0) {
         clearInterval(timeInterval);
+        hours.textContent = '00';
+        minutes.textContent = '00';
+        seconds.textContent = '00';
       }
     }
   }
